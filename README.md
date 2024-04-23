@@ -1,3 +1,26 @@
+# README
+
+This fork provides a Docker installation
+
+```
+docker build -t python-nab .
+```
+
+Set the permission for the shell script that encapsulates the Docker command
+
+```
+chmod +x python-nab.sh 
+```
+
+To run dockerized python
+
+```
+./python-nab.sh run.py --help
+```
+
+
+# Original README
+
 The Numenta Anomaly Benchmark (NAB) [![Build Status](https://travis-ci.org/numenta/NAB.svg?branch=master)](https://travis-ci.org/numenta/NAB) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1040335.svg)](https://doi.org/10.5281/zenodo.1040335)
 -----------------------------
 
