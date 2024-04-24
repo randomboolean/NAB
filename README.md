@@ -3,7 +3,7 @@
 This fork provides a Docker installation
 
 ```
-docker build -t python-nab .
+docker build --platform linux/amd64 -t python-nab .
 ```
 
 Set the permission for the shell script that encapsulates the Docker command

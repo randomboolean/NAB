@@ -9,4 +9,4 @@ if [ $# -eq 0 ]; then
 fi
 
 # Run the Docker command with passed arguments
-docker run -it --rm --name python-nab -v "$PWD":/usr/src/myapp -w /usr/src/myapp python-nab python "$@"
+docker run -it --rm --platform linux/amd64 --name python-nab -v "$PWD":/usr/src/myapp -w /usr/src/myapp python-nab python "$@"
