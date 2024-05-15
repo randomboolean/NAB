@@ -17,10 +17,15 @@ process_file() {
 '%0A' SPLIT
 0 REMOVE DROP
 
+'$src_filename' DUP 0 SWAP SIZE 4 - SUBSTRING
+'_' SPLIT 0 REMOVE 'detector' STORE
+'_' JOIN 'src_file' STORE
+
 NEWGTS 'results' RENAME
 {
-  'name' '\$src_filename' DUP 0 SWAP SIZE 4 - SUBSTRING
-  'dataset' '\$src_folder'
+  'detector' \$detector
+  'name' \$src_file
+  'dataset' '$src_folder'
   'source' 'numenta_anomaly_benchmark'
 }
 RELABEL
@@ -91,8 +96,6 @@ export -f process_file
 export src_dir dest_dir
 
 # Find all files in source directory and process each one
-find "$src_dir" -type f -exec bash -c 'process_file "$0" "${0/"$src_dir"/"$dest_dir"}"' {} \;
-
-rm $dest_dir/README.mc2
+find "$src_dir" -mindepth 3 -maxdepth 3 -type f -name '*.csv' -exec bash -c 'process_file "$0" "${0/"$src_dir"/$dest_dir}"' {} \;
 
 echo "Done."
