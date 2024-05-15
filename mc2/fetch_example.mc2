@@ -1,0 +1,18 @@
+// @endpoint https://sandbox.senx.io/api/v0/exec
+
+'laNEhdjedn5UkWpL5hnRB04QeQtzK5GXnQVvqhovjwazYPctD80KUCOqlcBd0Y2fGYmoBuFBzRVInIqXLsKp7rKvwt2hNvDd07JSjBXMti2q3r.AeHb9fvRbqRmtiLnwOWFzg9pGFCQ0DITZeFTgZufgEM1Zmh3hDVu8mcZYwPPK4y0ucNyAEY0Pqk3q.prYaL.8D_evvYYYcsaptHhc3UByDT.iI3C0RbQ471YKSucY6J.Wr.XfSATTg4y1cj7ZwyK9oLxn41IInz4pE7_Taj3I_TEOtYlwPFDdopVWUTo6lgxiMJTW.o3KG0UTSPfRw02JFVxp1E41ATXiC03mFtJy2u2qOU.8RmzPIxkAI6Wg4wkjCIRug8jfixjZ5PcxVhw4njzS_MR_sCVI2Yt4VQLt_RXyj83Kouz8pLVyzYQlIGhakoqVqk' 
+'token' STORE
+
+{
+  'token'  $token
+  'class'  'results'
+  'labels' {}
+  'end' NOW // timestamp or ISO8601 string
+  'count' 100 // limit to 100 points per gts
+} FETCH
+
+<%
+  DUP ATTRIBUTES 'decoder.mc2' GET EVAL
+  { '.app' NULL '.uuid' NULL } RELABEL
+%>
+F LMAP
