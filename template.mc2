@@ -1,0 +1,54 @@
+@w1@ 'w1' STORE
+@w1@ 'w2' STORE
+@theta1@ 'theta_1' STORE
+@theta2@ 'theta_2' STORE
+@pre@ 'pre' STORE
+
+
+<'
+@csvContent@  
+'>
+
+// convert into 2-d tensor
+'%0A' SPLIT
+<%
+  ',' SPLIT 0 2 SUBLIST
+%>
+F LMAP
+
+// remove col names
+0 REMOVE 'colnames' STORE
+
+// transpose
+ZIP
+
+// get anomaly likelyhood scores
+2 REMOVE
+
+//
+// modify them
+//
+<% TODOUBLE %> F LMAP 'data' STORE
+[] [] [] [] $data MAKEGTS
+[ SWAP <%
+VALUES 'values' STORE
+0 $values
+<%
+  't' STORE
+  $t $theta_1 - DUP 0 < <% DROP 0.0 %> IFT $w1 *
+  $t $theta_2 - DUP 0 < <% DROP 0.0 %> IFT $w2 *
+  +
+  +
+%>
+FOREACH
+$values SIZE /
+[ SWAP ]
+%> $pre ] MAP 0 GET
+
+// add them back
+VALUES +! 'data' STORE
+
+// recreate file
+[ $colnames ] $data ZIP APPEND
+<% ',' JOIN %> F LMAP
+'%0A' JOIN
